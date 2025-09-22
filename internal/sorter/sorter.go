@@ -2,7 +2,6 @@ package sorter
 
 import (
 	"bufio"
-	"fmt"
 	"os"
 	"sort"
 	"strconv"
@@ -18,21 +17,21 @@ type Options struct {
 
 func ReadLines() ([]string, error) {
 	var lines []string
+	var line string
 
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
+		line = scanner.Text()
+		lines = append(lines, strings.TrimRight(line, "\r"))
 	}
+
 	return lines, scanner.Err()
 }
 
-// TODO: фиксануть парсинг флага k
 func Sort(lines []string, options Options) []string {
 	if options.Unique {
 		lines = getUniqueLines(lines)
 	}
-
-	fmt.Println(options.SortColumn)
 
 	// Логика сортировки
 	sort.SliceStable(lines, func(i, j int) bool {
@@ -79,7 +78,7 @@ func getUniqueLines(lines []string) []string {
 }
 
 func getColumn(line string, ind uint32) string {
-	columns := strings.Split(line, "    ")
+	columns := strings.Split(line, "\t")
 	if ind == 0 {
 		return line
 	}

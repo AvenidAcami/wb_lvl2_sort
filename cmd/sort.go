@@ -31,7 +31,10 @@ var sortCmd = &cobra.Command{
 		})
 
 		for _, line := range result {
-			fmt.Fprintln(os.Stdout, line)
+			_, err = fmt.Fprintln(os.Stdout, line)
+			if err != nil {
+				return err
+			}
 		}
 		return nil
 	},

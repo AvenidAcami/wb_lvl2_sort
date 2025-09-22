@@ -1,0 +1,3 @@
+item2	5
+item3	42
+item1	100

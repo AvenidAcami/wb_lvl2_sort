@@ -1,0 +1,3 @@
+gamma	apple
+beta	dog
+alpha	zebra
